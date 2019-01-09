@@ -1,0 +1,7 @@
+Palette
+=======
+
+.. module:: colorpalette
+
+.. autoclass:: Palette
+   :members:

@@ -1,0 +1,26 @@
+.. colorpalette documentation master file, created by
+   sphinx-quickstart on Tue Jan  1 22:18:54 2019.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+colorpalette: Objects for coloring strings
+==========================================
+
+colorpalette is an object oriented extension of the `ansicolors package <https://pypi.org/project/ansicolors/>`__. It features Color objects that color strings when called.
+
+
+.. toctree::
+   :maxdepth: 2
+   
+   GettingStarted
+   Palette
+   Color
+
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

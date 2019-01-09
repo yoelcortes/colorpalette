@@ -1,0 +1,84 @@
+============
+colorpalette
+============
+
+.. image:: http://img.shields.io/pypi/v/colorpalette.svg?style=flat
+   :target: https://pypi.python.org/pypi/colorpalette
+   :alt: Version_status
+.. image:: http://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat
+   :target: https://colorpalette.readthedocs.io/en/latest/
+   :alt: Documentation
+.. image:: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+   :target: https://github.com/yoelcortes/colorpalette/blob/master/LICENSE.txt
+   :alt: license
+
+
+.. contents::
+
+What is colorpalette?
+---------------------
+
+colorpalette is an object oriented extension of the `ansicolors package <https://pypi.org/project/ansicolors/>`__. It features Color objects that color strings when called.
+
+Installation
+------------
+
+Get the latest version of colorpalette from
+https://pypi.python.org/pypi/colorpalette/
+
+If you have an installation of Python with pip, simple install it with:
+
+    $ pip install colorpalette
+
+To get the git version, run:
+
+    $ git clone git://github.com/yoelcortes/colorpalette
+
+Documentation
+-------------
+
+colorpalette's documentation is available on the web:
+
+    http://colorpalette.readthedocs.io/
+
+Getting started
+---------------
+
+To get started, please go to:
+
+    https://colorpalette.readthedocs.io/en/latest/GettingStarted.html
+
+Latest source code
+------------------
+
+The latest development version of colorpalette's sources can be obtained at:
+
+    https://github.com/yoelcortes/colorpalette
+
+
+Bug reports
+-----------
+
+To report bugs, please use the colorpalette's Bug Tracker at:
+
+    https://github.com/yoelcortes/colorpalette
+
+
+License information
+-------------------
+
+See ``LICENSE.txt`` for information on the terms & conditions for usage
+of this software, and a DISCLAIMER OF ALL WARRANTIES.
+
+Although not required by the colorpalette license, if it is convenient for you,
+please cite colorpalette if used in your work. Please also consider contributing
+any changes you make back, and benefit the community.
+
+
+Citation
+--------
+
+To cite colorpalette in publications use::
+
+    Yoel Cortes-Pena (2018). colorpalette: Objects for coloring strings
+    https://github.com/yoelcortes/colorpalette

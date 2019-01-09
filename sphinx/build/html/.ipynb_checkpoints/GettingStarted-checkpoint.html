@@ -1,0 +1,582 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Getting Started &#8212; colorpalette 2019 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">colorpalette 2019 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting Started</a><ul>
+<li><a class="reference internal" href="#Color:-Color-strings-based-on-the-ansicolors-package.">Color: Color strings based on the ansicolors package.</a></li>
+<li><a class="reference internal" href="#Palette:-Iterable-set-of-named-Color-objects.">Palette: Iterable set of named Color objects.</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/.ipynb_checkpoints/GettingStarted-checkpoint.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 9ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+</style>
+<div class="section" id="Getting-Started">
+<h1>Getting Started<a class="headerlink" href="#Getting-Started" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Color:-Color-strings-based-on-the-ansicolors-package.">
+<h2>Color: Color strings based on the <a class="reference external" href="https://pypi.org/project/ansicolors/">ansicolors package</a>.<a class="headerlink" href="#Color:-Color-strings-based-on-the-ansicolors-package." title="Permalink to this headline">¶</a></h2>
+<p>Create a color by ID:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">colorpalette</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">green</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="s1">&#39;forestgreen&#39;</span><span class="p">)</span>
+<span class="n">green</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span style="color: rgb(34,139,34)">&lt;forestgreen&gt;</span>
+</pre></div></div>
+</div>
+<p>Color a string:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">green</span><span class="p">(</span><span class="s1">&#39;This is green&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span style="color: rgb(34,139,34)">This is green</span>
+</pre></div></div>
+</div>
+<p>Color objects are string subclasses and can be concatenated just like
+any string. Add Color.reset, to remove the color code in later strings</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">green</span> <span class="o">+</span> <span class="s1">&#39;This is green&#39;</span> <span class="o">+</span> <span class="n">Color</span><span class="o">.</span><span class="n">reset</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">This is normal&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span style="color: rgb(34,139,34)">This is green</span>
+This is normal
+</pre></div></div>
+</div>
+<p>You can also create a color passing the foreground color (<code class="docutils literal notranslate"><span class="pre">fg</span></code>),
+background color (<code class="docutils literal notranslate"><span class="pre">bg</span></code>), <code class="docutils literal notranslate"><span class="pre">style</span></code>, and define them with an <code class="docutils literal notranslate"><span class="pre">ID</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">green_lavender</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="n">fg</span><span class="o">=</span><span class="s1">&#39;forestgreen&#39;</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s1">&#39;lavenderblush&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;underline&#39;</span><span class="p">,</span> <span class="n">ID</span><span class="o">=</span><span class="s1">&#39;green_lavender&#39;</span><span class="p">)</span>
+<span class="n">green_lavender</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span style="color: rgb(34,139,34); background-color: rgb(255,240,245)">&lt;green_lavender&gt;</span>
+</pre></div></div>
+</div>
+<p>Note: Please refer to the color function in the <a class="reference external" href="https://pypi.org/project/ansicolors/">ansicolors
+package</a> for further details on
+these parameters:</p>
+<p>All colors with an ID are saved in ‘cached’:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">Color</span><span class="o">.</span><span class="n">cached</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;aliceblue&#39;: <span style="color: rgb(240,248,255)">&lt;aliceblue&gt;</span>,
+&#39;antiquewhite&#39;: <span style="color: rgb(250,235,215)">&lt;antiquewhite&gt;</span>,
+&#39;aqua&#39;: <span style="color: rgb(0,255,255)">&lt;aqua&gt;</span>,
+&#39;aquamarine&#39;: <span style="color: rgb(127,255,212)">&lt;aquamarine&gt;</span>,
+&#39;azure&#39;: <span style="color: rgb(240,255,255)">&lt;azure&gt;</span>,
+&#39;beige&#39;: <span style="color: rgb(245,245,220)">&lt;beige&gt;</span>,
+&#39;bisque&#39;: <span style="color: rgb(255,228,196)">&lt;bisque&gt;</span>,
+&#39;black&#39;: <span class="ansi-black-fg">&lt;black&gt;</span>,
+&#39;blanchedalmond&#39;: <span style="color: rgb(255,235,205)">&lt;blanchedalmond&gt;</span>,
+&#39;blue&#39;: <span class="ansi-blue-fg">&lt;blue&gt;</span>,
+&#39;blueviolet&#39;: <span style="color: rgb(138,43,226)">&lt;blueviolet&gt;</span>,
+&#39;brown&#39;: <span style="color: rgb(165,42,42)">&lt;brown&gt;</span>,
+&#39;burlywood&#39;: <span style="color: rgb(222,184,135)">&lt;burlywood&gt;</span>,
+&#39;cadetblue&#39;: <span style="color: rgb(95,158,160)">&lt;cadetblue&gt;</span>,
+&#39;chartreuse&#39;: <span style="color: rgb(127,255,0)">&lt;chartreuse&gt;</span>,
+&#39;chocolate&#39;: <span style="color: rgb(210,105,30)">&lt;chocolate&gt;</span>,
+&#39;coral&#39;: <span style="color: rgb(255,127,80)">&lt;coral&gt;</span>,
+&#39;cornflowerblue&#39;: <span style="color: rgb(100,149,237)">&lt;cornflowerblue&gt;</span>,
+&#39;cornsilk&#39;: <span style="color: rgb(255,248,220)">&lt;cornsilk&gt;</span>,
+&#39;crimson&#39;: <span style="color: rgb(220,20,60)">&lt;crimson&gt;</span>,
+&#39;cyan&#39;: <span class="ansi-cyan-fg">&lt;cyan&gt;</span>,
+&#39;darkblue&#39;: <span style="color: rgb(0,0,139)">&lt;darkblue&gt;</span>,
+&#39;darkcyan&#39;: <span style="color: rgb(0,139,139)">&lt;darkcyan&gt;</span>,
+&#39;darkgoldenrod&#39;: <span style="color: rgb(184,134,11)">&lt;darkgoldenrod&gt;</span>,
+&#39;darkgray&#39;: <span style="color: rgb(169,169,169)">&lt;darkgray&gt;</span>,
+&#39;darkgreen&#39;: <span style="color: rgb(0,100,0)">&lt;darkgreen&gt;</span>,
+&#39;darkgrey&#39;: <span style="color: rgb(169,169,169)">&lt;darkgrey&gt;</span>,
+&#39;darkkhaki&#39;: <span style="color: rgb(189,183,107)">&lt;darkkhaki&gt;</span>,
+&#39;darkmagenta&#39;: <span style="color: rgb(139,0,139)">&lt;darkmagenta&gt;</span>,
+&#39;darkolivegreen&#39;: <span style="color: rgb(85,107,47)">&lt;darkolivegreen&gt;</span>,
+&#39;darkorange&#39;: <span style="color: rgb(255,140,0)">&lt;darkorange&gt;</span>,
+&#39;darkorchid&#39;: <span style="color: rgb(153,50,204)">&lt;darkorchid&gt;</span>,
+&#39;darkred&#39;: <span style="color: rgb(139,0,0)">&lt;darkred&gt;</span>,
+&#39;darksalmon&#39;: <span style="color: rgb(233,150,122)">&lt;darksalmon&gt;</span>,
+&#39;darkseagreen&#39;: <span style="color: rgb(143,188,143)">&lt;darkseagreen&gt;</span>,
+&#39;darkslateblue&#39;: <span style="color: rgb(72,61,139)">&lt;darkslateblue&gt;</span>,
+&#39;darkslategray&#39;: <span style="color: rgb(47,79,79)">&lt;darkslategray&gt;</span>,
+&#39;darkslategrey&#39;: <span style="color: rgb(47,79,79)">&lt;darkslategrey&gt;</span>,
+&#39;darkturquoise&#39;: <span style="color: rgb(0,206,209)">&lt;darkturquoise&gt;</span>,
+&#39;darkviolet&#39;: <span style="color: rgb(148,0,211)">&lt;darkviolet&gt;</span>,
+&#39;deeppink&#39;: <span style="color: rgb(255,20,147)">&lt;deeppink&gt;</span>,
+&#39;deepskyblue&#39;: <span style="color: rgb(0,191,255)">&lt;deepskyblue&gt;</span>,
+&#39;dimgray&#39;: <span style="color: rgb(105,105,105)">&lt;dimgray&gt;</span>,
+&#39;dimgrey&#39;: <span style="color: rgb(105,105,105)">&lt;dimgrey&gt;</span>,
+&#39;dodgerblue&#39;: <span style="color: rgb(30,144,255)">&lt;dodgerblue&gt;</span>,
+&#39;firebrick&#39;: <span style="color: rgb(178,34,34)">&lt;firebrick&gt;</span>,
+&#39;floralwhite&#39;: <span style="color: rgb(255,250,240)">&lt;floralwhite&gt;</span>,
+&#39;forestgreen&#39;: <span style="color: rgb(34,139,34)">&lt;forestgreen&gt;</span>,
+&#39;fuchsia&#39;: <span style="color: rgb(255,0,255)">&lt;fuchsia&gt;</span>,
+&#39;gainsboro&#39;: <span style="color: rgb(220,220,220)">&lt;gainsboro&gt;</span>,
+&#39;ghostwhite&#39;: <span style="color: rgb(248,248,255)">&lt;ghostwhite&gt;</span>,
+&#39;gold&#39;: <span style="color: rgb(255,215,0)">&lt;gold&gt;</span>,
+&#39;goldenrod&#39;: <span style="color: rgb(218,165,32)">&lt;goldenrod&gt;</span>,
+&#39;gray&#39;: <span style="color: rgb(128,128,128)">&lt;gray&gt;</span>,
+&#39;green&#39;: <span class="ansi-green-fg">&lt;green&gt;</span>,
+&#39;greenyellow&#39;: <span style="color: rgb(173,255,47)">&lt;greenyellow&gt;</span>,
+&#39;grey&#39;: <span style="color: rgb(128,128,128)">&lt;grey&gt;</span>,
+&#39;honeydew&#39;: <span style="color: rgb(240,255,240)">&lt;honeydew&gt;</span>,
+&#39;hotpink&#39;: <span style="color: rgb(255,105,180)">&lt;hotpink&gt;</span>,
+&#39;indianred&#39;: <span style="color: rgb(205,92,92)">&lt;indianred&gt;</span>,
+&#39;indigo&#39;: <span style="color: rgb(75,0,130)">&lt;indigo&gt;</span>,
+&#39;ivory&#39;: <span style="color: rgb(255,255,240)">&lt;ivory&gt;</span>,
+&#39;khaki&#39;: <span style="color: rgb(240,230,140)">&lt;khaki&gt;</span>,
+&#39;lavender&#39;: <span style="color: rgb(230,230,250)">&lt;lavender&gt;</span>,
+&#39;lavenderblush&#39;: <span style="color: rgb(255,240,245)">&lt;lavenderblush&gt;</span>,
+&#39;lawngreen&#39;: <span style="color: rgb(124,252,0)">&lt;lawngreen&gt;</span>,
+&#39;lemonchiffon&#39;: <span style="color: rgb(255,250,205)">&lt;lemonchiffon&gt;</span>,
+&#39;lightblue&#39;: <span style="color: rgb(173,216,230)">&lt;lightblue&gt;</span>,
+&#39;lightcoral&#39;: <span style="color: rgb(240,128,128)">&lt;lightcoral&gt;</span>,
+&#39;lightcyan&#39;: <span style="color: rgb(224,255,255)">&lt;lightcyan&gt;</span>,
+&#39;lightgoldenrodyellow&#39;: <span style="color: rgb(250,250,210)">&lt;lightgoldenrodyellow&gt;</span>,
+&#39;lightgray&#39;: <span style="color: rgb(211,211,211)">&lt;lightgray&gt;</span>,
+&#39;lightgreen&#39;: <span style="color: rgb(144,238,144)">&lt;lightgreen&gt;</span>,
+&#39;lightgrey&#39;: <span style="color: rgb(211,211,211)">&lt;lightgrey&gt;</span>,
+&#39;lightpink&#39;: <span style="color: rgb(255,182,193)">&lt;lightpink&gt;</span>,
+&#39;lightsalmon&#39;: <span style="color: rgb(255,160,122)">&lt;lightsalmon&gt;</span>,
+&#39;lightseagreen&#39;: <span style="color: rgb(32,178,170)">&lt;lightseagreen&gt;</span>,
+&#39;lightskyblue&#39;: <span style="color: rgb(135,206,250)">&lt;lightskyblue&gt;</span>,
+&#39;lightslategray&#39;: <span style="color: rgb(119,136,153)">&lt;lightslategray&gt;</span>,
+&#39;lightslategrey&#39;: <span style="color: rgb(119,136,153)">&lt;lightslategrey&gt;</span>,
+&#39;lightsteelblue&#39;: <span style="color: rgb(176,196,222)">&lt;lightsteelblue&gt;</span>,
+&#39;lightyellow&#39;: <span style="color: rgb(255,255,224)">&lt;lightyellow&gt;</span>,
+&#39;lime&#39;: <span style="color: rgb(0,255,0)">&lt;lime&gt;</span>,
+&#39;limegreen&#39;: <span style="color: rgb(50,205,50)">&lt;limegreen&gt;</span>,
+&#39;linen&#39;: <span style="color: rgb(250,240,230)">&lt;linen&gt;</span>,
+&#39;magenta&#39;: <span class="ansi-magenta-fg">&lt;magenta&gt;</span>,
+&#39;maroon&#39;: <span style="color: rgb(128,0,0)">&lt;maroon&gt;</span>,
+&#39;mediumaquamarine&#39;: <span style="color: rgb(102,205,170)">&lt;mediumaquamarine&gt;</span>,
+&#39;mediumblue&#39;: <span style="color: rgb(0,0,205)">&lt;mediumblue&gt;</span>,
+&#39;mediumorchid&#39;: <span style="color: rgb(186,85,211)">&lt;mediumorchid&gt;</span>,
+&#39;mediumpurple&#39;: <span style="color: rgb(147,112,219)">&lt;mediumpurple&gt;</span>,
+&#39;mediumseagreen&#39;: <span style="color: rgb(60,179,113)">&lt;mediumseagreen&gt;</span>,
+&#39;mediumslateblue&#39;: <span style="color: rgb(123,104,238)">&lt;mediumslateblue&gt;</span>,
+&#39;mediumspringgreen&#39;: <span style="color: rgb(0,250,154)">&lt;mediumspringgreen&gt;</span>,
+&#39;mediumturquoise&#39;: <span style="color: rgb(72,209,204)">&lt;mediumturquoise&gt;</span>,
+&#39;mediumvioletred&#39;: <span style="color: rgb(199,21,133)">&lt;mediumvioletred&gt;</span>,
+&#39;midnightblue&#39;: <span style="color: rgb(25,25,112)">&lt;midnightblue&gt;</span>,
+&#39;mintcream&#39;: <span style="color: rgb(245,255,250)">&lt;mintcream&gt;</span>,
+&#39;mistyrose&#39;: <span style="color: rgb(255,228,225)">&lt;mistyrose&gt;</span>,
+&#39;moccasin&#39;: <span style="color: rgb(255,228,181)">&lt;moccasin&gt;</span>,
+&#39;navajowhite&#39;: <span style="color: rgb(255,222,173)">&lt;navajowhite&gt;</span>,
+&#39;navy&#39;: <span style="color: rgb(0,0,128)">&lt;navy&gt;</span>,
+&#39;oldlace&#39;: <span style="color: rgb(253,245,230)">&lt;oldlace&gt;</span>,
+&#39;olive&#39;: <span style="color: rgb(128,128,0)">&lt;olive&gt;</span>,
+&#39;olivedrab&#39;: <span style="color: rgb(107,142,35)">&lt;olivedrab&gt;</span>,
+&#39;orange&#39;: <span style="color: rgb(255,165,0)">&lt;orange&gt;</span>,
+&#39;orangered&#39;: <span style="color: rgb(255,69,0)">&lt;orangered&gt;</span>,
+&#39;orchid&#39;: <span style="color: rgb(218,112,214)">&lt;orchid&gt;</span>,
+&#39;palegoldenrod&#39;: <span style="color: rgb(238,232,170)">&lt;palegoldenrod&gt;</span>,
+&#39;palegreen&#39;: <span style="color: rgb(152,251,152)">&lt;palegreen&gt;</span>,
+&#39;paleturquoise&#39;: <span style="color: rgb(175,238,238)">&lt;paleturquoise&gt;</span>,
+&#39;palevioletred&#39;: <span style="color: rgb(219,112,147)">&lt;palevioletred&gt;</span>,
+&#39;papayawhip&#39;: <span style="color: rgb(255,239,213)">&lt;papayawhip&gt;</span>,
+&#39;peachpuff&#39;: <span style="color: rgb(255,218,185)">&lt;peachpuff&gt;</span>,
+&#39;peru&#39;: <span style="color: rgb(205,133,63)">&lt;peru&gt;</span>,
+&#39;pink&#39;: <span style="color: rgb(255,192,203)">&lt;pink&gt;</span>,
+&#39;plum&#39;: <span style="color: rgb(221,160,221)">&lt;plum&gt;</span>,
+&#39;powderblue&#39;: <span style="color: rgb(176,224,230)">&lt;powderblue&gt;</span>,
+&#39;purple&#39;: <span style="color: rgb(128,0,128)">&lt;purple&gt;</span>,
+&#39;rebeccapurple&#39;: <span style="color: rgb(102,51,153)">&lt;rebeccapurple&gt;</span>,
+&#39;red&#39;: <span class="ansi-red-fg">&lt;red&gt;</span>,
+&#39;rosybrown&#39;: <span style="color: rgb(188,143,143)">&lt;rosybrown&gt;</span>,
+&#39;royalblue&#39;: <span style="color: rgb(65,105,225)">&lt;royalblue&gt;</span>,
+&#39;saddlebrown&#39;: <span style="color: rgb(139,69,19)">&lt;saddlebrown&gt;</span>,
+&#39;salmon&#39;: <span style="color: rgb(250,128,114)">&lt;salmon&gt;</span>,
+&#39;sandybrown&#39;: <span style="color: rgb(244,164,96)">&lt;sandybrown&gt;</span>,
+&#39;seagreen&#39;: <span style="color: rgb(46,139,87)">&lt;seagreen&gt;</span>,
+&#39;seashell&#39;: <span style="color: rgb(255,245,238)">&lt;seashell&gt;</span>,
+&#39;sienna&#39;: <span style="color: rgb(160,82,45)">&lt;sienna&gt;</span>,
+&#39;silver&#39;: <span style="color: rgb(192,192,192)">&lt;silver&gt;</span>,
+&#39;skyblue&#39;: <span style="color: rgb(135,206,235)">&lt;skyblue&gt;</span>,
+&#39;slateblue&#39;: <span style="color: rgb(106,90,205)">&lt;slateblue&gt;</span>,
+&#39;slategray&#39;: <span style="color: rgb(112,128,144)">&lt;slategray&gt;</span>,
+&#39;slategrey&#39;: <span style="color: rgb(112,128,144)">&lt;slategrey&gt;</span>,
+&#39;snow&#39;: <span style="color: rgb(255,250,250)">&lt;snow&gt;</span>,
+&#39;springgreen&#39;: <span style="color: rgb(0,255,127)">&lt;springgreen&gt;</span>,
+&#39;steelblue&#39;: <span style="color: rgb(70,130,180)">&lt;steelblue&gt;</span>,
+&#39;tan&#39;: <span style="color: rgb(210,180,140)">&lt;tan&gt;</span>,
+&#39;teal&#39;: <span style="color: rgb(0,128,128)">&lt;teal&gt;</span>,
+&#39;thistle&#39;: <span style="color: rgb(216,191,216)">&lt;thistle&gt;</span>,
+&#39;tomato&#39;: <span style="color: rgb(255,99,71)">&lt;tomato&gt;</span>,
+&#39;turquoise&#39;: <span style="color: rgb(64,224,208)">&lt;turquoise&gt;</span>,
+&#39;violet&#39;: <span style="color: rgb(238,130,238)">&lt;violet&gt;</span>,
+&#39;wheat&#39;: <span style="color: rgb(245,222,179)">&lt;wheat&gt;</span>,
+&#39;white&#39;: <span class="ansi-white-fg">&lt;white&gt;</span>,
+&#39;whitesmoke&#39;: <span style="color: rgb(245,245,245)">&lt;whitesmoke&gt;</span>,
+&#39;yellow&#39;: <span class="ansi-yellow-fg">&lt;yellow&gt;</span>,
+&#39;yellowgreen&#39;: <span style="color: rgb(154,205,50)">&lt;yellowgreen&gt;</span>,
+&#39;green_lavender&#39;: <span style="color: rgb(34,139,34); background-color: rgb(255,240,245)">&lt;green_lavender&gt;</span>}
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Palette:-Iterable-set-of-named-Color-objects.">
+<h2>Palette: Iterable set of named Color objects.<a class="headerlink" href="#Palette:-Iterable-set-of-named-Color-objects." title="Permalink to this headline">¶</a></h2>
+<p>Create a Palette object with key/Color pairs:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">color_scheme</span> <span class="o">=</span> <span class="n">Palette</span><span class="p">(</span><span class="n">string</span><span class="o">=</span><span class="n">green</span><span class="p">,</span> <span class="n">emphasis</span><span class="o">=</span><span class="n">green_lavender</span><span class="p">,</span> <span class="n">warning</span><span class="o">=</span><span class="n">Color</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">))</span>
+<span class="n">color_scheme</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Palette: <span style="color: rgb(34,139,34)">string</span>, <span style="color: rgb(34,139,34); background-color: rgb(255,240,245)">emphasis</span>, <span class="ansi-red-fg">warning</span>&gt;
+</pre></div></div>
+</div>
+<p>All Color objects are attributes:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">color_scheme</span><span class="o">.</span><span class="n">string</span><span class="p">,</span> <span class="n">color_scheme</span><span class="o">.</span><span class="n">emphasis</span><span class="p">,</span> <span class="n">color_scheme</span><span class="o">.</span><span class="n">warning</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(<span style="color: rgb(34,139,34)">&lt;forestgreen&gt;</span>, <span style="color: rgb(34,139,34); background-color: rgb(255,240,245)">&lt;green_lavender&gt;</span>, <span class="ansi-red-fg">&lt;red&gt;</span>)
+</pre></div></div>
+</div>
+<p>Palette objects are iterable:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">color_scheme</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">color</span><span class="p">(</span><span class="s1">&#39;Test&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span style="color: rgb(34,139,34)">Test</span>
+<span style="color: rgb(34,139,34); background-color: rgb(255,240,245)">Test</span>
+<span class="ansi-red-fg">Test</span>
+</pre></div></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">colorpalette 2019 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yoel Rene Cortes-Pena.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
+    </div>
+  </body>
+</html>
