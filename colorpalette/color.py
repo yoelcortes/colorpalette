@@ -45,8 +45,7 @@ class Color(str):
             elif style:
                 ID = style
         
-        if ID and not any((fg, bg, style)):
-            return cls.cached[ID]
+        if ID and not any((fg, bg, style)): return cls.cached[ID]
             
         ansicolor = colors.color('', fg, bg, style).replace(Style.RESET_ALL, '')
         self = cls.ansicolor(ansicolor, ID)
@@ -62,7 +61,7 @@ class Color(str):
         self = super().__new__(Color, ansicolor)
         self.ID = ID
         
-        if ID and ID not in cls.cached.keys():
+        if ID and ID not in cls.cached:
             cls.cached[ID] = self
         
         return self
