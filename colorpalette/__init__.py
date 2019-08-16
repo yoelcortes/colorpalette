@@ -6,8 +6,9 @@ Created on Tue Jan  1 21:04:25 2019
 """
 
 from .color import Color
-from .color_scheme import Palette
+from .palette import Palette
+from . import utils
+from .utils import *
 
-name = 'colorpalette'
-
-__all__ = ('Color', 'Palette')
+__all__ = ['Color', 'Palette']
+__all__.extend(utils.__all__)
