@@ -118,13 +118,11 @@ class Color(str):
         if self.ID:
             name = self.ID
         else:
-            try:
-                fg, bg, style = decode_ansi(self)
-            except:
-                bg = fg = style = None
-            else:
-                if isinstance(fg, np.ndarray): fg = tuple(fg)
-                if isinstance(bg, np.ndarray): bg = tuple(bg)
+            fg = self.RGB
+            bg = self.RGB_bg
+            style = self.style
+            if isinstance(fg, np.ndarray): fg = tuple(fg)
+            if isinstance(bg, np.ndarray): bg = tuple(bg)
             name = f"{type(self).__name__}(fg={fg}, bg={bg}, style={repr(style)})"
         return f'{self}{name}{Style.RESET_ALL}'
     
