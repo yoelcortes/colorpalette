@@ -114,6 +114,9 @@ class Color(str):
             bg = rgb_shade(bg, percent)
         return Color(ID or f'{percent}% shaded {self.ID}', fg, bg, style)
     
+    def _ipython_display_(self):
+        print(repr(self))
+    
     def __repr__(self):
         if self.ID:
             name = self.ID
