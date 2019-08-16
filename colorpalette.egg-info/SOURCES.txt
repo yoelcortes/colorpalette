@@ -1,0 +1,11 @@
+README.rst
+setup.py
+colorpalette/__init__.py
+colorpalette/color.py
+colorpalette/palette.py
+colorpalette/utils.py
+colorpalette.egg-info/PKG-INFO
+colorpalette.egg-info/SOURCES.txt
+colorpalette.egg-info/dependency_links.txt
+colorpalette.egg-info/requires.txt
+colorpalette.egg-info/top_level.txt
