@@ -32,8 +32,8 @@ class Palette:
     def __iter__(self):
         return (color for color in self.__dict__.values())
     
+    def _ipython_display_(self):
+        print(repr(self))
+    
     def __repr__(self):
-        out = f'<{type(self).__name__}: '
-        for attr, color in self.__dict__.items():
-            out += color(attr) + ', ' 
-        return out[:-2] + '>'
+        return f"{type(self).__name__}({', '.join([color(name) for name, color in self.__dict__.items()])})"
