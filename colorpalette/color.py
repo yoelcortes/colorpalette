@@ -54,7 +54,7 @@ class Color(str):
     @classmethod
     def ansicolor(cls, ID='', ansicolor=''):
         """Create a Color object with *ansicolor* code string."""
-        self = super().__new__(Color, ansicolor)
+        self = super().__new__(cls, ansicolor)
         if ID and ID not in cls.cached: cls.cached[ID] = self
         self.ID = ID
         return self
@@ -104,7 +104,16 @@ class Color(str):
             fg = rgb_tint(fg, percent)
         if bg is not None:
             bg = rgb_tint(bg, percent)
-        return Color(ID or f'{percent}% tinted {self.ID}', fg, bg, style)
+        if not ID:
+            *previous_tint, ID = self.ID.split(' tinted ')
+            if len(previous_tint) == 1:
+                try:
+                    p, *_ = previous_tint[0].split('%')
+                    p = float(p)
+                    percent = p + (100.-p)*percent/100.
+                except: pass
+            ID = f'{percent}% tinted {ID}'
+        return Color(ID, fg, bg, style)
 
     def shade(self, percent, ID=None):
         fg, bg, style = decode_ansi(self)
@@ -112,7 +121,16 @@ class Color(str):
             fg = rgb_shade(fg, percent)
         if bg is not None:
             bg = rgb_shade(bg, percent)
-        return Color(ID or f'{percent}% shaded {self.ID}', fg, bg, style)
+        if not ID:
+            *previous_shade, ID = self.ID.split(' shaded ')
+            if len(previous_shade):
+                try:
+                    p, *_ = previous_shade[0].split('%')
+                    p = float(p)
+                    percent = p + (100.-p)*percent/100.
+                except: pass
+            ID = f'{percent}% shaded {ID}'
+        return Color(ID, fg, bg, style)
     
     def _ipython_display_(self):
         print(repr(self))
