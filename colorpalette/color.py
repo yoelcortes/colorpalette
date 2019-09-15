@@ -10,51 +10,65 @@ import numpy as np
 import colors
 
 
-class Color(str):
-    """Create a Color object that can color/style strings. Color objects are an extension of the color function in the `ansicolors package <https://pypi.org/project/ansicolors/>`__.
+class Color:
+    """Create a Color object that can color/style strings. Color objects are an extension of the color function in the `ansicolors` package <https://pypi.org/project/ansicolors/>`__.
     
-    **Parameters**
+    Parameters
+    ----------
+    ID: str
+        Name of color.
     
-        **ID:** [str] Name of color.
-        
-        **fg:** [str] Foreground color.
-        
-        **bg:** [str] Background color.
-        
-        **style:** [str] Options include 'bold', 'underline', or None
-        
-        Both *fg* and *bg* should be one of the following [-]:
-            * 3-element tuple or list of int, each valued 0 to 255 (e.g. (255, 218, 185)),
-            * string containing a CSS-compatible color name (e.g. 'peachpuff'),
-            * string containing a CSS-style hex value (e.g. '#aaa' or '#8a2be2')
-            * string containing a CSS-style RGB notation (e.g. 'rgb(102,51,153)')
-            * None
+    fg: str
+        Foreground color.
     
-    **Examples:**
+    bg: str
+        Background color.
     
-        :doc:`GettingStarted`
+    style: str
+        Options include 'bold', 'underline', or None
+    
+    Notes
+    -----
+    Both *fg* and *bg* should be one of the following [-]:
+        * 3-element tuple or list of int, each valued 0 to 255 (e.g. (255, 218, 185)),
+        * string containing a CSS-compatible color name (e.g. 'peachpuff'),
+        * string containing a CSS-style hex value (e.g. '#aaa' or '#8a2be2')
+        * string containing a CSS-style RGB notation (e.g. 'rgb(102,51,153)')
+        * None
+    
+    Examples
+    --------
+    :doc:`GettingStarted`
     
     """
-    __slots__ = ('ID', '_RGB', '_RGB_bg', '_style')
+    __slots__ = ('ID', '_ansi', '_RGB', '_RGB_bg', '_style')
     
     cached = {}
     
-    def __new__(cls, ID='', fg=None, bg=None, style=None):
+    def __new__(self, ID='', fg=None, bg=None, style=None):
         if ID and fg is None and bg is None and style is None:
-            return cls.cached[ID]
+            return self.cached[ID]
         if isinstance(fg, np.ndarray): fg = tuple([int(i) for i in fg])
         if isinstance(bg, np.ndarray): bg = tuple([int(i) for i in bg])
-        ansicolor = colors.color('', fg, bg, style).replace(Style.RESET_ALL, '')
-        self = cls.ansicolor(ID, ansicolor)
-        return self
+        ansi = colors.color('', fg, bg, style).replace(Style.RESET_ALL, '')
+        return self.from_ansi(ID, ansi)
     
-    def __init__(cls, ID=None, fg=None, bg=None, style=None):
-        pass # Necessary to include signature in sphinx docs
+    @property
+    def ansi(self):
+        """[str] Ansi color code."""
+        return self._ansi
+    @ansi.setter
+    def ansi(self, ansi):
+        self._ansi = ansi
+        if hasattr(self, '_RGB'): del self._RGB
+        if hasattr(self, '_RGB_bg'): del self._RGB_bg
+        if hasattr(self, '_style'): del self._style
     
     @classmethod
-    def ansicolor(cls, ID='', ansicolor=''):
-        """Create a Color object with *ansicolor* code string."""
-        self = super().__new__(cls, ansicolor)
+    def from_ansi(cls, ID='', ansi=''):
+        """Create a Color object with ansi color code string."""
+        self = object.__new__(cls)
+        self._ansi = ansi
         if ID and ID not in cls.cached: cls.cached[ID] = self
         self.ID = ID
         return self
@@ -62,22 +76,28 @@ class Color(str):
     def __call__(self, string):
         return self + str(string) + Style.RESET_ALL 
 
+    def __add__(self, string):
+        return self._ansi + string
+    
+    def __radd__(self, string):
+        return string + self._ansi
+
     @property
     def RGB(self):
         """[array] Foreground color in RGB on a 0-255 scale."""
         if not hasattr(self, '_RGB'):
-            self._RGB, self._RGB_bg, self._style = decode_ansi(self)
+            self._RGB, self._RGB_bg, self._style = decode_ansi(self._ansi)
         return self._RGB
     @property
     def RGB_bg(self):
         """[array] Background color in RGB on a 0-255 scale."""
         if not hasattr(self, '_RGB_bg'):
-            self._RGB, self._RGB_bg, self._style = decode_ansi(self)
+            self._RGB, self._RGB_bg, self._style = decode_ansi(self._ansi)
         return self._RGB_bg
     @property
     def style(self):
         if not hasattr(self, '_style'):
-            self._RGB, self._RGB_bg, self._style = decode_ansi(self)
+            self._RGB, self._RGB_bg, self._style = decode_ansi(self._ansi)
         return self._style
     
     @property
@@ -99,7 +119,7 @@ class Color(str):
         return rgb2hex(self.RGB_bg)
 
     def tint(self, percent, ID=None):
-        fg, bg, style = decode_ansi(self)
+        fg, bg, style = decode_ansi(self._ansi)
         if fg is not None:
             fg = rgb_tint(fg, percent)
         if bg is not None:
@@ -116,7 +136,7 @@ class Color(str):
         return Color(ID, fg, bg, style)
 
     def shade(self, percent, ID=None):
-        fg, bg, style = decode_ansi(self)
+        fg, bg, style = decode_ansi(self._ansi)
         if fg is not None:
             fg = rgb_shade(fg, percent)
         if bg is not None:
@@ -135,6 +155,9 @@ class Color(str):
     def _ipython_display_(self):
         print(repr(self))
     
+    def __str__(self):
+        return self._ansi
+    
     def __repr__(self):
         if self.ID:
             name = self.ID
@@ -148,4 +171,4 @@ class Color(str):
         return f'{self}{name}{Style.RESET_ALL}'
     
 Color.cached = dict((i, Color(i, fg=i)) for i in colors.css_colors.keys())
-Color.reset = Color.ansicolor('reset', Style.RESET_ALL)
+Color.reset = Color.from_ansi('reset', Style.RESET_ALL)
