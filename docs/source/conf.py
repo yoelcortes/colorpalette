@@ -41,6 +41,7 @@ autodoc_member_order = 'bysource'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+	'numpydoc',
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
@@ -50,7 +51,6 @@ extensions = [
     'sphinx.ext.imgmath',
     'sphinx.ext.ifconfig',
     'sphinx.ext.autosummary',
-	'numpydoc',
     'nbsphinx']
 
 
