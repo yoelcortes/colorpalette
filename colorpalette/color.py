@@ -152,8 +152,9 @@ class Color:
             ID = f'{percent}% shaded {ID}'
         return Color(ID, fg, bg, style)
     
-    def _ipython_display_(self):
+    def show(self):
         print(repr(self))
+    _ipython_display_ = show  
     
     def __str__(self):
         return self._ansi
