@@ -10,5 +10,4 @@ from .palette import Palette
 from . import utils
 from .utils import *
 
-__all__ = ['Color', 'Palette']
-__all__.extend(utils.__all__)
+__all__ = ('Color', 'Palette', *utils.__all__)

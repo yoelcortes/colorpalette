@@ -11,7 +11,10 @@ import colors
 
 
 class Color:
-    """Create a Color object that can color/style strings. Color objects are an extension of the color function in the `ansicolors` package <https://pypi.org/project/ansicolors/>`__.
+    """
+    Create a Color object that can color/style strings. Color objects are an 
+    extension of the color function in the `ansicolors` 
+    package <https://pypi.org/project/ansicolors/>`__.
     
     Parameters
     ----------
@@ -82,6 +85,11 @@ class Color:
     def __radd__(self, string):
         return string + self._ansi
 
+    def invert(self, ID=None):
+        """Return a new Color object with their foreground and background swapped."""
+        return type(self)(ID=ID or f"{self.ID}-inverted", 
+                          fg=self.HEX_bg, bg=self.HEX, style=self._style)
+
     @property
     def RGB(self):
         """[array] Foreground color in RGB on a 0-255 scale."""
@@ -96,6 +104,7 @@ class Color:
         return self._RGB_bg
     @property
     def style(self):
+        """[str] Font style."""
         if not hasattr(self, '_style'):
             self._RGB, self._RGB_bg, self._style = decode_ansi(self._ansi)
         return self._style
@@ -103,22 +112,27 @@ class Color:
     @property
     def RGBn(self):
         """[array] Foreground color in RGB on a normalized 0-1 scale."""
-        return self.RGB/255.
+        RGB = self.RGB
+        return None if RGB is None else self.RGB/255.
     @property
     def RGBn_bg(self):
         """[array] Background color in RGB on a normalized 0-1 scale."""
-        return self.RGB_bg/255.
+        RGB_bg = self.RGB_bg
+        return None if RGB_bg is None else self.RGB_bg/255.
     
     @property
     def HEX(self):
         """[str] Foreground color in HEX code."""
-        return rgb2hex(self.RGB)
+        RGB = self.RGB
+        return None if RGB is None else rgb2hex(RGB)
     @property
     def HEX_bg(self):
         """[str] Background color in HEX code."""
-        return rgb2hex(self.RGB_bg)
+        RGB_bg = self.RGB_bg
+        return None if RGB_bg is None else rgb2hex(RGB_bg)
 
     def tint(self, percent, ID=None):
+        """Return a new Color object tinted by given percent."""
         fg, bg, style = decode_ansi(self._ansi)
         if fg is not None:
             fg = rgb_tint(fg, percent)
@@ -136,6 +150,7 @@ class Color:
         return Color(ID, fg, bg, style)
 
     def shade(self, percent, ID=None):
+        """Return a new Color object shaded by given percent."""
         fg, bg, style = decode_ansi(self._ansi)
         if fg is not None:
             fg = rgb_shade(fg, percent)
