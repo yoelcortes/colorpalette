@@ -7,7 +7,10 @@ Created on Tue Jan  1 21:04:25 2019
 
 from .color import Color
 from .palette import Palette
+from .color_wheel import ColorWheel
 from . import utils
 from .utils import *
 
-__all__ = ('Color', 'Palette', *utils.__all__)
+__version__ = '0.3.2'
+
+__all__ = ('Color', 'Palette', 'ColorWheel', *utils.__all__)

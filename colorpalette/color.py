@@ -20,13 +20,10 @@ class Color:
     ----------
     ID: str
         Name of color.
-    
     fg: str
         Foreground color.
-    
     bg: str
         Background color.
-    
     style: str
         Options include 'bold', 'underline', or None
     
@@ -56,6 +53,12 @@ class Color:
         ansi = colors.color('', fg, bg, style).replace(Style.RESET_ALL, '')
         return self.from_ansi(ID, ansi)
     
+    def copy(self, ID=None):
+        copy = super().__new__(self.__class__)
+        copy.ID = self.ID if ID is None else ID
+        copy._ansi = self._ansi
+        return copy
+        
     @property
     def ansi(self):
         """[str] Ansi color code."""

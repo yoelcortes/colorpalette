@@ -15,7 +15,30 @@ RGBs = (np.array([0  , 0  , 0  ]), # black
         np.array([0  , 170, 170]), # cyan
         np.array([255, 255, 255])) # white
 
-__all__ = ('decode_ansi', 'rgb2hex', 'rgb_tint', 'rgb_shade')
+__all__ = ('decode_ansi', 'rgb2hex', 'rgb_tint', 'rgb_shade', 'view')
+
+
+def view(colors, names=None, format='HEX'):
+    import matplotlib.pyplot as plt
+    N = np.ceil(len(colors) / 6)
+    ymax = N
+    xmax = 6
+    plt.axis([0, xmax, 0, N])
+    plt.axis('off')
+    position = 0
+    ax = plt.gca()
+    for i in colors:
+        x = 0.5 + position % xmax
+        y = ymax - np.floor(position / xmax) - 0.5
+        position += 1
+        ax.text(x, y + 0.3, i.ID, fontsize=8, horizontalalignment='center', 
+                verticalalignment='center')
+        ax.text(x, y + 0.5, getattr(i, format), fontsize=8, horizontalalignment='center', 
+                verticalalignment='center')
+        assert x < xmax
+        assert y + 0.3 < ymax
+        circle = plt.Circle([x, y], radius=0.2, color=i.RGBn)
+        ax.add_artist(circle)
 
 def rgb2hex(rgb):
     R, G, B = rgb
@@ -69,8 +92,3 @@ def decode_ansi(ansi):
     else:
         fgbgstyle.append(None)
     return fgbgstyle
-
-
-    
-    
-    
