@@ -41,7 +41,6 @@ class Color:
     :doc:`GettingStarted`
     
     """
-    __slots__ = ('ID', '_ansi', '_RGB', '_RGB_bg', '_style')
     
     cached = {}
     
@@ -53,10 +52,12 @@ class Color:
         ansi = colors.color('', fg, bg, style).replace(Style.RESET_ALL, '')
         return self.from_ansi(ID, ansi)
     
-    def copy(self, ID=None):
+    def copy(self, ID=None, **kwargs):
         copy = super().__new__(self.__class__)
         copy.ID = self.ID if ID is None else ID
         copy._ansi = self._ansi
+        if kwargs: 
+            for i, j in kwargs.items(): setattr(copy, i, j)
         return copy
         
     @property

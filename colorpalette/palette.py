@@ -30,8 +30,12 @@ class Palette:
     def view(self, *args, **kwargs):
         return colorpalette.view(tuple(self), *args, **kwargs)
     
-    def wheel(self):
-        return colorpalette.ColorWheel(self)
+    def wheel(self, keys=None):
+        dct = self.__dict__
+        if keys is None:
+            return colorpalette.ColorWheel(dct.values())
+        else:
+            return colorpalette.ColorWheel([dct[i] for i in keys])
     
     def __setattr__(self, attr, new_color):
         if isinstance(new_color, Color):
@@ -43,7 +47,7 @@ class Palette:
         return len(self.__dict__)
     
     def __iter__(self):
-        return (color for color in self.__dict__.values())
+        return self.__dict__.values().__iter__()
     
     def _ipython_display_(self):
         print(repr(self))

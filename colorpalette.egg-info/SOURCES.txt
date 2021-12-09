@@ -2,6 +2,7 @@ README.rst
 setup.py
 colorpalette/__init__.py
 colorpalette/color.py
+colorpalette/color_wheel.py
 colorpalette/palette.py
 colorpalette/utils.py
 colorpalette.egg-info/PKG-INFO

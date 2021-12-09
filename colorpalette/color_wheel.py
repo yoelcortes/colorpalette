@@ -15,7 +15,7 @@ class ColorWheel:
     
     Parameters
     ----------
-        colors: tuple[Color]
+        colors: list[Color]
             Colors to cycle through.
     
     Examples
@@ -26,7 +26,7 @@ class ColorWheel:
     __slots__ = ('colors', 'index')
     
     def __init__(self, colors):
-        self.colors = tuple(colors)
+        self.colors = list(colors)
         self.restart()
 
     def view(self, *args, **kwargs):
@@ -55,5 +55,6 @@ class ColorWheel:
         self.index = (index + 1) % len(colors)
         return color
     
-    __repr__ = Palette.__repr__
+    def __repr__(self):
+        return f"{type(self).__name__}({self.colors})"
     _ipython_display_ = Palette._ipython_display_
