@@ -11,6 +11,6 @@ from .color_wheel import ColorWheel
 from . import utils
 from .utils import *
 
-__version__ = '0.3.2'
+__version__ = '0.3.3'
 
 __all__ = ('Color', 'Palette', 'ColorWheel', *utils.__all__)
