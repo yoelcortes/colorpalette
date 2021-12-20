@@ -1,3 +1,4 @@
+LICENSE.txt
 README.rst
 setup.py
 colorpalette/__init__.py
