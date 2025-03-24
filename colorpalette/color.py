@@ -44,13 +44,20 @@ class Color:
     
     cached = {}
     
-    def __new__(self, ID='', fg=None, bg=None, style=None):
+    def __new__(cls, ID='', fg=None, bg=None, style=None):
         if ID and fg is None and bg is None and style is None:
-            return self.cached[ID]
-        if isinstance(fg, np.ndarray): fg = tuple([int(i) for i in fg])
-        if isinstance(bg, np.ndarray): bg = tuple([int(i) for i in bg])
+            try:
+                return cls(ID, fg=ID)
+            except:
+                return cls.cached[ID]
+        if isinstance(fg, np.ndarray): 
+            if (fg >= 0.).all() and (fg <= 1.).all(): fg *= 255 
+            fg = tuple([int(i) for i in fg])
+        if isinstance(bg, np.ndarray): 
+            if (bg >= 0.).all() and (bg <= 1.).all(): bg *= 255 
+            bg = tuple([int(i) for i in bg])
         ansi = colors.color('', fg, bg, style).replace(Style.RESET_ALL, '')
-        return self.from_ansi(ID, ansi)
+        return cls.from_ansi(ID, ansi)
     
     def copy(self, ID=None, **kwargs):
         copy = super().__new__(self.__class__)
