@@ -1,3 +1,0 @@
-ansicolors
-colorama
-numpy

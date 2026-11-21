@@ -37,6 +37,12 @@ class Palette:
         else:
             return colorpalette.ColorWheel([dct[i] for i in keys])
     
+    def __getitem__(self, key):
+        return getattr(self, key)
+    
+    def __setitem__(self, key, value):
+        return setattr(self, key, value)
+    
     def __setattr__(self, attr, new_color):
         if isinstance(new_color, Color):
             super().__setattr__(attr, new_color)

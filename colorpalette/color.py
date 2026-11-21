@@ -96,10 +96,29 @@ class Color:
     def __radd__(self, string):
         return string + self._ansi
 
-    def invert(self, ID=None):
+    def swap(self, ID=None):
         """Return a new Color object with their foreground and background swapped."""
-        return type(self)(ID=ID or f"{self.ID}-inverted", 
-                          fg=self.HEX_bg, bg=self.HEX, style=self._style)
+        return type(self)(
+            ID=ID or f"{self.ID}-inverted", 
+            fg=self.HEX_bg,
+            bg=self.HEX, 
+            style=self._style
+        )
+
+    def invert(self, ID=None):
+        """Return a new Color object with their foreground and background inverted."""
+        ceiling = np.array([255, 255, 255])
+        if self.RGB is None:
+            fg = self.RGB
+        else:
+            fg = ceiling - self.RGB
+        if self.RGB_bg is None:
+            bg = self.RGB_bg
+        else:
+            bg = ceiling - self.RGB_bg
+        return type(self)(
+            ID=ID or f"{self.ID}-inverted", fg=fg, bg=bg, style=self._style
+        )
 
     @property
     def RGB(self):
